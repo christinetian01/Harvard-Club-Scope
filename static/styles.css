@@ -1,0 +1,31 @@
+.filler{
+    width: 50px;
+    height : 50px;
+    background-color : red;
+    margin: 1px 1px 1px 1px;
+    float: left;
+}
+
+.cell{
+    width: 50px;
+    height : 50px;
+    background-color : yellow;
+    margin: 1px 1px 1px 1px;
+    display: inline-block;
+    float:left;
+}
+
+#calendar_days{
+    width: 370px;
+}
+
+
+.weekday{
+    display:inline-block;
+    width: 48px;
+    text-align:center;
+}
+
+.cell:hover{
+    background-color:aqua;
+}

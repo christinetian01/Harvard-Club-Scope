@@ -4,6 +4,58 @@
 
 {% block main %}
 
+<form>
+    <select name="month" id = "month">
+        <option disabled selected value="">Month</option>
+        <option value = "January">January</option>
+        <option value = "January">February</option>
+        <option value = "January">March</option>
+        <option value = "January">April</option>        
+        <option value = "January">May</option>
+        <option value = "January">June</option>
+        <option value = "January">July</option>
+        <option value = "January">August</option>
+        <option value = "January">September</option>
+        <option value = "January">October</option>
+        <option value = "January">November</option>
+        <option value = "January">December</option>
+    </select>
+    <select name="year" id = "year">
+        <option disabled selected value="">Year</option>
+        {% for year in years %}
+            <option value = "{{year}}">{{year}}</option>
+        {% endfor %}
+    </select>
+    <button id = "set_date" type = "submit"> Done </button>
+</form>
 
+<div class = "calendar_body">
+
+    <div class = "weekday">
+        Sun
+    </div>
+    <div class = "weekday">
+        Mon
+    </div>
+    <div class = "weekday">
+        Tues
+    </div>
+    <div class = "weekday">
+        Wed
+    </div>
+    <div class = "weekday">
+        Thurs
+    </div>
+    <div class = "weekday">
+        Fri
+    </div>
+    <div class = "weekday">
+        Sat
+    </div>
+
+    <div id = "calendar_days"></div>
+
+
+</div>
 
 {% endblock %}
