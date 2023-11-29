@@ -7,7 +7,12 @@
 <main class="container py-5 text-center">
     <form action='/register' method="post">
         <div class="mb-3">
-            <input name="username" type="text" placeholder="Username">
+            <select class="form-select mx-auto w-auto" name="symbol">
+                <option disabled selected value="">Club</option>
+                {% for club in clubs %}
+                    <option value="{{club['clubname']}}">{{club['clubname']}}</option>
+                {% endfor %}
+            </select>
         </div>
         <div class="mb-3">
             <input name="password" type="password" placeholder="Password">

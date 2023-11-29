@@ -4,21 +4,27 @@
 
 {% block main %}
 
-<form>
+<span>
+    <h4 id = "month_text"></h4>
+    <h4 id = "year_text"></h4>
+</span>
+
+
+<form action = '/'>
     <select name="month" id = "month">
         <option disabled selected value="">Month</option>
         <option value = "January">January</option>
-        <option value = "January">February</option>
-        <option value = "January">March</option>
-        <option value = "January">April</option>        
-        <option value = "January">May</option>
-        <option value = "January">June</option>
-        <option value = "January">July</option>
-        <option value = "January">August</option>
-        <option value = "January">September</option>
-        <option value = "January">October</option>
-        <option value = "January">November</option>
-        <option value = "January">December</option>
+        <option value = "February">February</option>
+        <option value = "March">March</option>
+        <option value = "April">April</option>        
+        <option value = "May">May</option>
+        <option value = "June">June</option>
+        <option value = "July">July</option>
+        <option value = "August">August</option>
+        <option value = "September">September</option>
+        <option value = "October">October</option>
+        <option value = "November">November</option>
+        <option value = "December">December</option>
     </select>
     <select name="year" id = "year">
         <option disabled selected value="">Year</option>
@@ -26,7 +32,6 @@
             <option value = "{{year}}">{{year}}</option>
         {% endfor %}
     </select>
-    <button id = "set_date" type = "submit"> Done </button>
 </form>
 
 <div class = "calendar_body">

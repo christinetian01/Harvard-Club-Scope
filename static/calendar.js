@@ -1,25 +1,25 @@
 document.addEventListener('DOMContentLoaded', function(){
 
-    const currentDate = new Date();
-    let month = document.getElementById('month').value;
-    let year = document.getElementById('year').value;
-    
-    if (month=="" & year==""){
-        year = currentDate.getFullYear();
-        month = currentDate.getMonth();
-    }
-
-    console.log(month)
-    console.log(year)
-
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     
-    function calendarGrid(year, month){
+    const currentDate = new Date();
+    let selectedYear = currentDate.getFullYear();
+    let selectedMonth = currentDate.getMonth();
+
+    const month_select = document.querySelector("#month")
+    const year_select = document.querySelector("#year")
+    
+    function calendarGrid(month, year){
+        document.getElementById("month_text").innerHTML = months[month];
+        document.getElementById("year_text").innerHTML = year;
     
         let cal_days = document.getElementById("calendar_days");
 
+        while (cal_days.hasChildNodes()){
+            cal_days.removeChild(cal_days.firstChild);
+        }
+
         let firstDay = new Date(year, month, 1).getDay();
-        console.log(firstDay);
         let days = new Date(year, month+1, 0).getDate()
         
         // making the filler cells
@@ -46,11 +46,22 @@ document.addEventListener('DOMContentLoaded', function(){
         
     }
 
-    let date_select = document.getElementById("set_date");
-    date_select.addEventListener("submit", function(){
-        month = document.getElementById('month').value;
-        year = document.getElementById('year').value;
-    })
-    
-    calendarGrid(year, month)
+    function changeMonth(event){
+        if (event.target){
+            selectedMonth = months.indexOf(event.target.value);
+        }
+        calendarGrid(selectedMonth, selectedYear)
+    }
+
+    function changeYear(event){
+        if (event.target){
+            selectedYear = event.target.value;
+        }
+        calendarGrid(selectedMonth, selectedYear)
+    }
+
+    month_select.addEventListener("change", changeMonth);
+    year_select.addEventListener("change", changeYear);
+
+    calendarGrid(selectedMonth, selectedYear);
 })

@@ -1,5 +1,9 @@
 from flask import Flask, render_template, redirect, request, session
 from flask_session import Session
+import requests
+import psycopg2
+from bs4 import BeautifulSoup
+import sqlite3
 
 app = Flask(__name__)
 
@@ -7,6 +11,9 @@ app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+
+connection = sqlite3.connect("clubs.db", check_same_thread = False)
+db = connection.cursor()
 
 @app.route('/')
 def index():
@@ -35,39 +42,25 @@ def login():
 def register():
     """Register user"""
     if request.method == "GET":
-        return render_template("register.html")
+        clubs = db.execute("SELECT * FROM club_names")
+        connection.close()
+        return render_template("register.html", clubs = clubs)
 
-    # getting the username and confirmation
-    # not storing password for cybersecurity reasons
-    username = request.form.get("username")
-    confirm = request.form.get("confirmation")
+def club_scrape():
 
-    # username wasn't entered
-    if not username:
-        return apology("Please enter a username!")
-    # password wasn't entered
-    if not request.form.get("password"):
-        return apology("Please enter a password!")
-    # password wasn't confirmed
-    if not confirm:
-        return apology("Please confirm your password!")
-    # password confirmation doesn't match
-    if request.form.get("password") != confirm:
-        return apology("Confirmation password didn't match! Please re-enter!")
+    URL = "https://csadvising.seas.harvard.edu/opportunities/clubs/"
+    page = requests.get(URL)
 
-    # hash the password
-    hash_pass = generate_password_hash(request.form.get("password"))
+    soup = BeautifulSoup(page.text)
 
-    # insert new username and password into users table
-    try:
-        db.execute(
-            "INSERT INTO users (username, hash) VALUES (?, ?)", username, hash_pass
-        )
-    except ValueError:
-        return apology("This username is taken! Please enter another!")
+    wrap_div = soup.find("div", {"class":"padding highlightable"})
+    clubs = wrap_div.find("div", {"id":"body-inner"}).find_all('li')
 
-    return redirect("/")
-
+    for club in clubs:
+        db.execute("INSERT INTO club_names VALUES (?)", (club.find('a').text,))
+        connection.commit()
+    
+club_scrape()
 
 if __name__ == "__main__":
     app.run(debug = True)
