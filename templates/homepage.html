@@ -4,13 +4,14 @@
 
 {% block main %}
 
-<span>
+<div id = "title">
     <h4 id = "month_text"></h4>
     <h4 id = "year_text"></h4>
-</span>
+</div>
 
 
-<form action = '/'>
+
+<form action = '/' id = "change_dates">
     <select name="month" id = "month">
         <option disabled selected value="">Month</option>
         <option value = "January">January</option>
@@ -35,32 +36,38 @@
 </form>
 
 <div class = "calendar_body">
-
-    <div class = "weekday">
-        Sun
-    </div>
-    <div class = "weekday">
-        Mon
-    </div>
-    <div class = "weekday">
-        Tues
-    </div>
-    <div class = "weekday">
-        Wed
-    </div>
-    <div class = "weekday">
-        Thurs
-    </div>
-    <div class = "weekday">
-        Fri
-    </div>
-    <div class = "weekday">
-        Sat
+    <div id = "weekdays">
+        <div class = "weekday">
+            Sun
+        </div>
+        <div class = "weekday">
+            Mon
+        </div>
+        <div class = "weekday">
+            Tues
+        </div>
+        <div class = "weekday">
+            Wed
+        </div>
+        <div class = "weekday">
+            Thurs
+        </div>
+        <div class = "weekday">
+            Fri
+        </div>
+        <div class = "weekday">
+            Sat
+        </div>
     </div>
 
     <div id = "calendar_days"></div>
 
+</div>
 
+<div id = "separator"></div>
+
+<div id= "event_listings">
+    <h4>Click a date to see all club events!</h4>
 </div>
 
 {% endblock %}

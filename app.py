@@ -4,6 +4,7 @@ import requests
 import psycopg2
 from bs4 import BeautifulSoup
 import sqlite3
+import datetime
 
 app = Flask(__name__)
 
@@ -19,8 +20,9 @@ db = connection.cursor()
 def index():
     years = []
 
+    year = datetime.date.today().year
     for i in range(10):
-        years.append(2023+i)
+        years.append(year+i)
 
     return render_template("homepage.html", years = years)
 
@@ -60,6 +62,7 @@ def club_scrape():
         db.execute("INSERT INTO club_names VALUES (?)", (club.find('a').text,))
         connection.commit()
     
+
 club_scrape()
 
 if __name__ == "__main__":

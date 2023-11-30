@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function(){
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    
+    let previousSelect = null;
+
     const currentDate = new Date();
     let selectedYear = currentDate.getFullYear();
     let selectedMonth = currentDate.getMonth();
@@ -34,7 +35,10 @@ document.addEventListener('DOMContentLoaded', function(){
         for (let i = 0; i<days; i++){
             let cellDiv = document.createElement("div");
             cellDiv.className = "cell";
+            cellDiv.id = "" + month + (i+1) + year;
             cellDiv.innerHTML = i+1;
+
+            cellDiv.addEventListener('click', selectDate);
 
             if (i%7 == (7-firstDay)){
                 nl = document.createElement("br");
@@ -45,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function(){
         }
         
     }
+
 
     function changeMonth(event){
         if (event.target){
@@ -58,6 +63,21 @@ document.addEventListener('DOMContentLoaded', function(){
             selectedYear = event.target.value;
         }
         calendarGrid(selectedMonth, selectedYear)
+    }
+
+    function selectDate(event){
+        if (previousSelect != null){
+            previousSelect.style.background = "yellow";
+        }
+
+        if (previousSelect != event.target){
+            event.target.style.background = "blue";
+            previousSelect = event.target;
+        }
+        else{
+            previousSelect = null;
+        }
+        
     }
 
     month_select.addEventListener("change", changeMonth);
