@@ -3,7 +3,6 @@ from flask_session import Session
 import requests
 import psycopg2
 from bs4 import BeautifulSoup
-import sqlite3
 import datetime
 
 app = Flask(__name__)
@@ -13,8 +12,8 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-connection = sqlite3.connect("clubs.db", check_same_thread = False)
-db = connection.cursor()
+conn = psycopg2.connect(database = "clubs", user = "postgres", password = "cs50harvardsc0pE2023", host = "localhost", port = "5432")
+db = conn.cursor()
 
 @app.route('/')
 def index():
@@ -44,8 +43,11 @@ def login():
 def register():
     """Register user"""
     if request.method == "GET":
-        clubs = db.execute("SELECT * FROM club_names")
-        connection.close()
+        club_scrape()
+        db.execute("SELECT * FROM club_names")
+        clubs = db.fetchall()
+        print(clubs)
+        
         return render_template("register.html", clubs = clubs)
 
 def club_scrape():
@@ -59,11 +61,9 @@ def club_scrape():
     clubs = wrap_div.find("div", {"id":"body-inner"}).find_all('li')
 
     for club in clubs:
-        db.execute("INSERT INTO club_names VALUES (?)", (club.find('a').text,))
-        connection.commit()
-    
+        db.execute("INSERT INTO club_names SELECT (%s) WHERE NOT EXISTS (SELECT * FROM club_names WHERE clubname = (%s))", (club.find('a').text, club.find('a').text))
+        conn.commit()
 
-club_scrape()
 
 if __name__ == "__main__":
     app.run(debug = True)

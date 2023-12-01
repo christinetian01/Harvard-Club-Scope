@@ -10,7 +10,7 @@
             <select class="form-select mx-auto w-auto" name="symbol">
                 <option disabled selected value="">Club</option>
                 {% for club in clubs %}
-                    <option value="{{club['clubname']}}">{{club['clubname']}}</option>
+                    <option value="{{club[0]}}">{{club[0]}}</option>
                 {% endfor %}
             </select>
         </div>
