@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<main class="container py-5 text-center">
+    <form action='/edit_bio' method="post">
+        <div class="mb-3">
+            <textarea name="new_bio" rows="4" cols="50">{{bio[0]}}</textarea>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Update</button>
+
+        <p>{{success_error}}</p>
+    </form>
+</main>
+
+{% endblock %}

@@ -198,3 +198,30 @@ def upcoming_events():
 
     return render_template("upcoming_events.html", events = events)
 
+@app.route("/club_profile", methods = ["POST"])
+def club_profile():
+    club = request.form.get('club_button')
+    print(club)
+
+    db.execute("SELECT * FROM registered_clubs WHERE clubname = %s", (club, ))
+    club_info = db.fetchall()[0]
+    print(club_info)
+
+    return render_template("club_profile.html", club_info = club_info)
+
+@app.route("/edit_bio", methods = ["GET", "POST"])
+@login_required
+def edit_bio():
+        if request.method == "GET":
+            db.execute("SELECT bio FROM registered_clubs WHERE id = %s", (session["user_id"], ))
+            bio = db.fetchall()[0]
+
+            return render_template("edit_bio.html", bio = bio)
+        
+        new_bio = request.form.get("new_bio")
+
+        db.execute("UPDATE registered_clubs SET bio = %s WHERE id = %s", (new_bio, session["user_id"]))
+        conn.commit()
+
+        return redirect("/")
+

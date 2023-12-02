@@ -21,6 +21,11 @@
                 <td class="text-start">{{event[10]}}</td>
                 <td class="text-end">{{event[11]}}</td>
                 <td class="text-end">{{event[4]}}</td>
+                <td class="text-end">
+                    <form action = "/edit_profile" method = "post">
+                        <button>Edit</button>
+                    </form>
+                </td>
             </tr>
         {% endfor %}
     </table>
