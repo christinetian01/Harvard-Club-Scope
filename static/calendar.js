@@ -1,11 +1,21 @@
 document.addEventListener('DOMContentLoaded', function(){
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    let previousSelect = null;
 
     const currentDate = new Date();
     let selectedYear = currentDate.getFullYear();
     let selectedMonth = currentDate.getMonth();
+
+    let selectedDate = document.querySelector("#selected_date").innerHTML;
+
+    if (selectedDate !=null){
+        let newDate = new Date(selectedDate);
+        selectedYear = newDate.getFullYear();
+        selectedMonth = newDate.getMonth();
+    }
+    console.log(selectedYear);
+    console.log(selectedMonth);
+
 
     const month_select = document.querySelector("#month")
     const year_select = document.querySelector("#year")
@@ -78,6 +88,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
     month_select.addEventListener("change", changeMonth);
     year_select.addEventListener("change", changeYear);
+
+
+    sessionStorage.setItem(selectedYear, selectedYear);
+    sessionStorage.setItem(selectedMonth, selectedMonth);
 
     calendarGrid(selectedMonth, selectedYear);
 })

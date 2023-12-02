@@ -1,35 +1,37 @@
 .filler{
-    width: 50px;
-    height : 50px;
+    width: 100px;
+    height : 100px;
     margin: 1px 1px 1px 1px;
     float: left;
     border-radius: 8px;
 }
 
 .cell{
-    width: 50px;
-    height : 50px;
-    background-color : yellow;
+    width: 100px;
+    height : 100px;
+    background-color : #A41034;
     margin: 1px 1px 1px 1px;
     display: inline-block;
     border-radius: 8px;
+    color: white;
 }
 
 #calendar_days{
-    width:370px;
+    width:720px;
     margin:auto;
 }
 
 
 .weekday{
     display:inline-block;
-    width: 45px;
+    width: 95px;
     margin: 1px 1px 1px 1px;
     text-align:center;
+    font-size:20px;
 }
 
 .cell:hover{
-    background-color:aqua;
+    background-color:rgba(113, 15, 39, 0.435)
 }
 
 h4{
@@ -37,7 +39,7 @@ h4{
 }
 
 #weekdays{
-    width:370px;
+    width:720px;
     margin:auto;
 }
 

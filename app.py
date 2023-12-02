@@ -65,7 +65,7 @@ def index():
     db.execute("SELECT * FROM events WHERE date = %s", (date, ))
     events = db.fetchall()
 
-    return render_template("homepage.html", years = years, events = events, message = "Events for " + date)
+    return render_template("homepage.html", date = date, years = years, events = events, message = "Events for " + date)
     
 
 @app.route("/login", methods=["GET", "POST"])
@@ -193,7 +193,7 @@ if __name__ == "__main__":
 @app.route("/upcoming_events", methods = ["GET"])
 @login_required
 def upcoming_events():
-    db.execute("SELECT * FROM events WHERE id = %s ORDER BY date, time", (session["user_id"], ))
+    db.execute("SELECT * FROM events WHERE club_id = %s ORDER BY date, time", (session["user_id"], ))
     events = db.fetchall()
 
     return render_template("upcoming_events.html", events = events)
@@ -225,3 +225,36 @@ def edit_bio():
 
         return redirect("/")
 
+
+
+@app.route("/edit_events_direct", methods = ["POST"])
+@login_required
+def edit_events_direct():
+    event_id = request.form.get("edit_button")
+    print(event_id)
+
+    db.execute("SELECT * FROM events WHERE event_id = %s", (event_id,))
+    event = db.fetchall()[0]
+
+    return render_template("edit_events_direct.html", event = event)
+
+@app.route("/edit_events", methods = ["POST"])
+@login_required
+def edit_events():
+    event_id = request.form.get("event_id")
+
+    event_name = request.form.get("event_name")
+    description = request.form.get("description")
+    loc = request.form.get("loc")
+    street = request.form.get("street")
+    city = request.form.get("city")
+    state = request.form.get("state")
+    zip_code = request.form.get("zip")
+    room_number = request.form.get("room_num")
+    date = request.form.get("date")
+    time = request.form.get("time")
+
+    db.execute("UPDATE events SET name = %s, description = %s, locationname = %s, street = %s, city = %s, state = %s, zip = %s, room_num = %s, date = %s, time = %s WHERE event_id = %s", (event_name, description, loc, street, city, state, zip_code, room_number, date, time, event_id))
+    conn.commit()
+
+    return redirect("/upcoming_events")
