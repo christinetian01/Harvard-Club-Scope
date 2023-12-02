@@ -10,7 +10,6 @@
 </div>
 
 
-
 <form action = '/' id = "change_dates">
     <select name="month" id = "month">
         <option disabled selected value="">Month</option>
@@ -67,7 +66,27 @@
 <div id = "separator"></div>
 
 <div id= "event_listings">
-    <h4>Click a date to see all club events!</h4>
+    <h4>{{message}}</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class = "text-start">Club</th>
+                <th class="text-start">Event Name</th>
+                <th class="text-start">Description</th>
+                <th class="text-end">Time</th>
+                <th class="text-end">Location</th>
+            </tr>
+        </thead>
+        {% for event in events %}
+            <tr>
+                <td class="text-start">{{event[1]}}</td>
+                <td class="text-start">{{event[2]}}</td>
+                <td class="text-start">{{event[3]}}</td>
+                <td class="text-end">{{event[11]}}</td>
+                <td class="text-end">{{event[4]}}</td>
+            </tr>
+        {% endfor %}
+    </table>
 </div>
 
 {% endblock %}

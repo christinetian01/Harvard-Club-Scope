@@ -22,14 +22,20 @@
     <body>
         <nav class="bg-light border navbar navbar-expand-md navbar-light">
             <div class="container-fluid">
-                <h2> HarvardScope </h2>
+                <a href="/" style = "color:black;text-decoration:none"><h2> HarvardScope </h2></a>
                 <div class="collapse navbar-collapse" id="navbar">
-
-                        <ul class="navbar-nav ms-auto mt-2">
-                            <li class="nav-item"><a class="nav-link" href="/register">Register Your Club</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/login">Add a Club Event</a></li>
-                        </ul>
-
+                    {% if session["user_id"] %}
+                    <ul class="navbar-nav ms-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/add_event">Add an Event</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+                    </ul>
+                        
+                    {% else %}
+                    <ul class="navbar-nav ms-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/register">Register Your Club</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/login">Club Log In</a></li>
+                    </ul>
+                    {% endif %}
                 </div>
             </div>
         </nav>

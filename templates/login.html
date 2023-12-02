@@ -4,16 +4,23 @@
 
 {% block main %}
 
-<h5>Please login to your account</h5>
+<h3>Please login to your account</h3>
 
 <form action="/login" method="post">
     <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+        <select class="form-select mx-auto w-auto" name="clubname">
+            <option disabled selected value="">Club</option>
+            {% for club in clubs %}
+                <option value="{{club[0]}}">{{club[0]}}</option>
+            {% endfor %}
+        </select>
     </div>
     <div class="mb-3">
         <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
     </div>
+    <p>{{success_error}}</p>
     <button class="btn btn-primary" type="submit">Log In</button>
+
 </form>
 
 {% endblock %}

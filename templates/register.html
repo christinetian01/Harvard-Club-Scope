@@ -7,12 +7,15 @@
 <main class="container py-5 text-center">
     <form action='/register' method="post">
         <div class="mb-3">
-            <select class="form-select mx-auto w-auto" name="symbol">
+            <select class="form-select mx-auto w-auto" name="clubname">
                 <option disabled selected value="">Club</option>
                 {% for club in clubs %}
                     <option value="{{club[0]}}">{{club[0]}}</option>
                 {% endfor %}
             </select>
+        </div>
+        <div class="mb-3">
+            <textarea name="bio" rows="4" cols="50" placeholder = "Club Bio!"></textarea>
         </div>
         <div class="mb-3">
             <input name="password" type="password" placeholder="Password">
@@ -22,6 +25,7 @@
         </div>
 
         <button class="btn btn-primary" type="submit">Register</button>
+        <p>{{success_error}}</p>
     </form>
 </main>
 

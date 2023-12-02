@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+
+<main class="container py-5 text-center">
+    <h4>Upcoming Events!</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start">Event Name</th>
+                <th class="text-start">Description</th>
+                <th class="text-start">Date</th>
+                <th class="text-start">Time</th>
+                <th class="text-end">Location</th>
+            </tr>
+        </thead>
+        {% for event in events %}
+            <tr>
+                <td class="text-start">{{event[2]}}</td>
+                <td class="text-start">{{event[3]}}</td>
+                <td class="text-start">{{event[10]}}</td>
+                <td class="text-end">{{event[11]}}</td>
+                <td class="text-end">{{event[4]}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</main>
+
+{% endblock %}

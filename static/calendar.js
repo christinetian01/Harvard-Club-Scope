@@ -33,19 +33,30 @@ document.addEventListener('DOMContentLoaded', function(){
 
         // making the actual cells
         for (let i = 0; i<days; i++){
-            let cellDiv = document.createElement("div");
-            cellDiv.className = "cell";
-            cellDiv.id = "" + month + (i+1) + year;
-            cellDiv.innerHTML = i+1;
+            let cellDivForm = document.createElement("form")
+            cellDivForm.action = "/"
+            cellDivForm.className = "cell"
+            cellDivForm.method = "post"
 
-            cellDiv.addEventListener('click', selectDate);
+            let cellDiv = document.createElement("button");
+            cellDiv.className = "cell";
+            cellDiv.name = "cell";
+            cellDiv.type = "submit";
+            if ((""+(i+1)).length == 1){
+                cellDiv.value = "" + year + "-" + (month+1) + "-0" + (i+1);
+            }
+            else{
+                cellDiv.value = "" + year + "-" + (month+1) + "-" + (i+1);
+            }    
+            cellDiv.innerHTML = i+1;
+            cellDivForm.appendChild(cellDiv)
 
             if (i%7 == (7-firstDay)){
                 nl = document.createElement("br");
                 cal_days.appendChild(nl);
             }
 
-            cal_days.appendChild(cellDiv);
+            cal_days.appendChild(cellDivForm);
         }
         
     }
@@ -63,21 +74,6 @@ document.addEventListener('DOMContentLoaded', function(){
             selectedYear = event.target.value;
         }
         calendarGrid(selectedMonth, selectedYear)
-    }
-
-    function selectDate(event){
-        if (previousSelect != null){
-            previousSelect.style.background = "yellow";
-        }
-
-        if (previousSelect != event.target){
-            event.target.style.background = "blue";
-            previousSelect = event.target;
-        }
-        else{
-            previousSelect = null;
-        }
-        
     }
 
     month_select.addEventListener("change", changeMonth);
