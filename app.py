@@ -59,7 +59,7 @@ def index():
         years.append(year+i)
 
     if request.method == "GET":
-        return render_template("homepage.html", years = years, message = "Click to see events!")
+        return render_template("homepage.html", date = datetime.date.today(), years = years, message = "Click to see events!")
     
     date = request.form.get('cell')
     db.execute("SELECT * FROM events WHERE date = %s", (date, ))
@@ -79,11 +79,11 @@ def login():
     if request.method == "POST":
         # Ensure username was submitted
         if not request.form.get("clubname"):
-            return apology("must provide username", 403)
+            return render_template("error.html", message = "must provide club name")
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("must provide password", 403)
+            return render_template("error.html", message = "must provide password")
 
         # Query database for username
         db.execute(
@@ -95,7 +95,7 @@ def login():
         if len(rows) != 1 or not check_password_hash(
             rows[0][3], request.form.get("password")
         ):
-            return apology("invalid username and/or password", 403)
+            return render_template("error.html", message = "invalid username and/or password")
 
         # Remember which user has logged in
         session["user_id"] = rows[0][0]
@@ -124,18 +124,18 @@ def register():
 
     # username wasn't entered
     if not clubname:
-        return render_template("register.html", success_error = "Please select a club!", clubs = clubs)
+        return render_template("error.html", message = "Please select a club!")
     # password wasn't entered
     if not request.form.get("password"):
-        return render_template("register.html", success_error = "Please enter a password!", clubs = clubs)
+        return render_template("error.html", message = "Please enter a password!")
     if not bio:
-        return render_template("register.html", success_error = "Please enter a short club bio!", clubs = clubs)
+        return render_template("error.html", message = "Please enter a short club bio!")
     # password wasn't confirmed
     if not confirm:
-        return render_template("register.html", success_error = "Please confirm your password!", clubs = clubs)
+        return render_template("error.html", message = "Please confirm your password!")
     # password confirmation doesn't match
     if request.form.get("password") != confirm:
-        return render_template("register.html", success_error = "Confirmation password didn't match! Please re-enter!", clubs = clubs)
+        return render_template("error.html", message = "Confirmation password didn't match! Please re-enter!")
 
     # hash the password
     hash_pass = generate_password_hash(request.form.get("password"))
@@ -146,9 +146,8 @@ def register():
         conn.commit()
     except psycopg2.errors.UniqueViolation:
         conn.rollback()
-        return render_template("register.html", success_error = "This club has already registered", clubs = clubs)
+        return render_template("error.html", message = "This club has already registered")
 
-    #WHY DOES THE PAGE CRASH WHEN I RELOAD
     return redirect('/')
 
 @app.route("/add_event", methods = ["GET", "POST"])
@@ -160,18 +159,27 @@ def add_event():
     event_name = request.form.get("event_name")
     description = request.form.get("description")
     loc = request.form.get("loc")
-    street = request.form.get("street")
-    city = request.form.get("city")
-    state = request.form.get("state")
-    zip_code = request.form.get("zip")
     room_number = request.form.get("room_num")
     date = request.form.get("date")
     time = request.form.get("time")
+
+    if not event_name:
+        return render_template("error.html", message = "Please provide an event name")
+    if not description:
+        return render_template("error.html", message = "Please provide an event description")
+    if not loc:
+        return render_template("error.html", message = "Please provide an event location")
+    if not room_number:
+        return render_template("error.html", message = "Please provide a room number")
+    if not date:
+        return render_template("error.html", message = "Please provide a date")
+    if not time:
+        return render_template("error.html", message = "Please provide a time")
     
     db.execute("SELECT clubname FROM registered_clubs WHERE id = %s", (session["user_id"], ))
     club_name = db.fetchall()[0]
 
-    db.execute("INSERT INTO events VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (session["user_id"], club_name, event_name, description, loc, street, city, state, zip_code, room_number, date, time))
+    db.execute("INSERT INTO events VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (session["user_id"], club_name, event_name, description, loc, room_number, date, time))
     conn.commit()
 
     return redirect("/upcoming_events")
@@ -201,7 +209,6 @@ def upcoming_events():
 @app.route("/club_profile", methods = ["POST"])
 def club_profile():
     club = request.form.get('club_button')
-    print(club)
 
     db.execute("SELECT * FROM registered_clubs WHERE clubname = %s", (club, ))
     club_info = db.fetchall()[0]
@@ -219,6 +226,8 @@ def edit_bio():
             return render_template("edit_bio.html", bio = bio)
         
         new_bio = request.form.get("new_bio")
+        if not new_bio:
+            return render_template("error.html", message = "Bio cannot be empty")
 
         db.execute("UPDATE registered_clubs SET bio = %s WHERE id = %s", (new_bio, session["user_id"]))
         conn.commit()
@@ -231,8 +240,7 @@ def edit_bio():
 @login_required
 def edit_events_direct():
     event_id = request.form.get("edit_button")
-    print(event_id)
-
+    
     db.execute("SELECT * FROM events WHERE event_id = %s", (event_id,))
     event = db.fetchall()[0]
 
@@ -246,15 +254,24 @@ def edit_events():
     event_name = request.form.get("event_name")
     description = request.form.get("description")
     loc = request.form.get("loc")
-    street = request.form.get("street")
-    city = request.form.get("city")
-    state = request.form.get("state")
-    zip_code = request.form.get("zip")
     room_number = request.form.get("room_num")
     date = request.form.get("date")
     time = request.form.get("time")
 
-    db.execute("UPDATE events SET name = %s, description = %s, locationname = %s, street = %s, city = %s, state = %s, zip = %s, room_num = %s, date = %s, time = %s WHERE event_id = %s", (event_name, description, loc, street, city, state, zip_code, room_number, date, time, event_id))
+    if not event_name:
+        return render_template("error.html", message = "Please provide an event name")
+    if not description:
+        return render_template("error.html", message = "Please provide an event description")
+    if not loc:
+        return render_template("error.html", message = "Please provide an event location")
+    if not room_number:
+        return render_template("error.html", message = "Please provide a room number")
+    if not date:
+        return render_template("error.html", message = "Please provide a date")
+    if not time:
+        return render_template("error.html", message = "Please provide a time")
+
+    db.execute("UPDATE events SET name = %s, description = %s, locationname = %s, room_num = %s, date = %s, time = %s WHERE event_id = %s", (event_name, description, loc, room_number, date, time, event_id))
     conn.commit()
 
     return redirect("/upcoming_events")

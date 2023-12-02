@@ -7,8 +7,9 @@ document.addEventListener('DOMContentLoaded', function(){
     let selectedMonth = currentDate.getMonth();
 
     let selectedDate = document.querySelector("#selected_date").innerHTML;
+    console.log(selectedDate);
 
-    if (selectedDate !=null){
+    if (selectedDate !=""){
         let newDate = new Date(selectedDate);
         selectedYear = newDate.getFullYear();
         selectedMonth = newDate.getMonth();

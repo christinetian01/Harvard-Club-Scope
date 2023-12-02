@@ -5,30 +5,30 @@
 <main class="container py-5 text-center">
     <form action="/add_event" method="post">
     <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="event_name" name="event_name" placeholder="Event Name" type="text">
+        <input autocomplete="off" autofocus class="form-control mx-auto" id="event_name" name="event_name" placeholder="Event Name" type="text" required>
     </div>
     <div class="mb-3">
-        <textarea name="description" rows="4" cols="50" placeholder = "Event Description"></textarea>
+        <textarea name="description" rows="4" cols="50" placeholder = "Event Description" required></textarea>
     </div>
     
     <h3>Location Details</h3>
     <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="loc" name="loc" placeholder="Location Name" type="text">
+        <input autocomplete="off" autofocus class="form-control mx-auto" id="loc" name="loc" placeholder="Location Name" type="text" required>
     </div>
     <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="street" name="street" placeholder="Street and Street Number (# name)" type="text">
+        <input autocomplete="off" autofocus class="form-control mx-auto" id="street" name="street" placeholder="Street and Street Number (# name)" type="text" required>
     </div>
     <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="city" name="city" placeholder="City" type="text">
+        <input autocomplete="off" autofocus class="form-control mx-auto" id="city" name="city" placeholder="City" type="text" required>
     </div>
     <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="state" name="state" placeholder="State" type="text">
+        <input autocomplete="off" autofocus class="form-control mx-auto" id="state" name="state" placeholder="State" type="text" required>
     </div>
     <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="zip" name="zip" placeholder="Zip Code" type="text">
+        <input autocomplete="off" autofocus class="form-control mx-auto" id="zip" name="zip" placeholder="Zip Code" type="text" required>
     </div>
     <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="room_num" name="room_num" placeholder="Room Number (if applicable)" type="text">
+        <input autocomplete="off" autofocus class="form-control mx-auto" id="room_num" name="room_num" placeholder="Room Number (if applicable)" type="text" required>
     </div> 
 
     <h3>Event Date</h3>

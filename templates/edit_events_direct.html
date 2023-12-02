@@ -5,7 +5,7 @@
 <main class="container py-5 text-center" >
     <form action="/edit_events" method="post">
     <div style="display: none;">
-        <input type="text" name = "event_id" value='{{event[12]}}' readonly>
+        <input type="text" name = "event_id" value='{{event[8]}}' readonly>
     </div>
     <div class="mb-3">
         <input autocomplete="off" autofocus class="form-control mx-auto" id="event_name" name="event_name" placeholder="Event Name" type="text" value = '{{event[2]}}'>
@@ -19,24 +19,12 @@
         <input autocomplete="off" autofocus class="form-control mx-auto" id="loc" name="loc" placeholder="Location Name" type="text" value = '{{event[5]}}'>
     </div>
     <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="street" name="street" placeholder="Street and Street Number (# name)" type="text" value = '{{event[6]}}'>
-    </div>
-    <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="city" name="city" placeholder="City" type="text" value = '{{event[7]}}'>
-    </div>
-    <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="state" name="state" placeholder="State" type="text" value = '{{event[8]}}'>
-    </div>
-    <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="zip" name="zip" placeholder="Zip Code" type="text" value = '{{event[9]}}'>
-    </div>
-    <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="room_num" name="room_num" placeholder="Room Number (if applicable)" type="text" value = '{{event[10]}}'>
+        <input autocomplete="off" autofocus class="form-control mx-auto" id="room_num" name="room_num" placeholder="Room Number (if applicable)" type="text" value = '{{event[5]}}'>
     </div> 
 
     <h3>Event Date</h3>
-    <input name = "date" type = "date" value = '{{event[10]}}' required>
-    <input name = "time" type = "time" value = '{{event[11]}}' required>
+    <input name = "date" type = "date" value = '{{event[6]}}' required>
+    <input name = "time" type = "time" value = '{{event[7]}}' required>
 
     <button class="btn btn-primary" type="submit">Edit Event</button>
     </form>

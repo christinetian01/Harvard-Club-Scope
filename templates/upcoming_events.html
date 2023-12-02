@@ -18,12 +18,12 @@
             <tr>
                 <td class="text-start">{{event[2]}}</td>
                 <td class="text-start">{{event[3]}}</td>
-                <td class="text-start">{{event[10]}}</td>
-                <td class="text-end">{{event[11]}}</td>
+                <td class="text-start">{{event[6]}}</td>
+                <td class="text-end">{{event[7]}}</td>
                 <td class="text-end">{{event[4]}}</td>
                 <td class="text-end">
                     <form action = "/edit_events_direct" method = "post">
-                        <button name = "edit_button" value = '{{event[12]}}'>Edit</button>
+                        <button type = "submit" name = "edit_button" value = {{event[8]}}>Edit</button>
                     </form>
                 </td>
             </tr>
