@@ -64,7 +64,7 @@ def index():
         return render_template("homepage.html", date = datetime.date.today(), years = years, message = "Click to see events!")
     
     date = request.form.get('cell')
-    db.execute("SELECT * FROM events WHERE date = %s", (date, ))
+    db.execute("SELECT * FROM events WHERE date = %s ORDER BY time", (date, ))
     events = db.fetchall()
 
     return render_template("homepage.html", date = date, years = years, events = events, message = "Events for " + date)
@@ -290,3 +290,17 @@ def edit_events():
     conn.commit()
 
     return redirect("/upcoming_events")
+
+@app.route("/explore_clubs", methods = ["GET"])
+def explore_clubs():
+    db.execute("SELECT * FROM registered_clubs")
+    clubs = db.fetchall()
+
+    return render_template("explore_clubs.html", clubs = clubs)
+
+@app.route("/all_upcoming_events", methods = ["GET"])
+def all_upcoming_events():
+    db.execute("SELECT * FROM events WHERE date >= (SELECT date_trunc('day', NOW())) ORDER BY date, time")
+    all_events = db.fetchall()
+
+    return render_template("all_upcoming_events.html", all_events = all_events)

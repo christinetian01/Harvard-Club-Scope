@@ -7,6 +7,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th class="text-start">Club</th>
                 <th class="text-start">Event Name</th>
                 <th class="text-start">Description</th>
                 <th class="text-start">Date</th>
@@ -14,18 +15,14 @@
                 <th class="text-start">Location</th>
             </tr>
         </thead>
-        {% for event in events %}
+        {% for event in all_events %}
             <tr>
+                <td class="text-start">{{event[1]}}</td>
                 <td class="text-start">{{event[2]}}</td>
                 <td class="text-start">{{event[3]}}</td>
                 <td class="text-start">{{event[6]}}</td>
                 <td class="text-start">{{event[7]}}</td>
                 <td class="text-start">{{event[4]}}</td>
-                <td class="text-end">
-                    <form action = "/edit_events_direct" method = "post">
-                        <button type = "submit" name = "edit_button" value = {{event[8]}}>Edit</button>
-                    </form>
-                </td>
             </tr>
         {% endfor %}
     </table>

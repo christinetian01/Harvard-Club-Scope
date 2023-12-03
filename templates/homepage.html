@@ -80,11 +80,7 @@
         </thead>
         {% for event in events %}
             <tr>
-                <td class="text-start">
-                    <form action = "/club_profile" method = "post">
-                        <button name = "club_button" value = '{{event[1]}}' class="btn btn-primary" type="submit">{{event[1]}}</button>
-                    </form>
-                </td>
+                <td class="text-start">{{event[1]}}</td>
                 <td class="text-start">{{event[2]}}</td>
                 <td class="text-start">{{event[3]}}</td>
                 <td class="text-end">{{event[7]}}</td>

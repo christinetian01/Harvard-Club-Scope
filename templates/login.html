@@ -4,7 +4,10 @@
 
 {% block main %}
 
-<h3>Please login to your account</h3>
+<div class="mb-3">
+    <h3>Please login to your account</h3>
+</div>
+
 
 <form action="/login" method="post">
     <div class="mb-3">
@@ -18,8 +21,11 @@
     <div class="mb-3">
         <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
     </div>
-    <p>{{success_error}}</p>
-    <button class="btn btn-primary" type="submit">Log In</button>
+
+    <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </div>
+    
 
 </form>
 
