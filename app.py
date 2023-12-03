@@ -50,6 +50,8 @@ club_scrape()
 db.execute("SELECT * FROM club_names")
 clubs = db.fetchall()
 
+
+
 @app.route("/", methods=["GET", "POST"])
 @app.route('/')
 def index():
@@ -150,6 +152,8 @@ def register():
 
     return redirect('/')
 
+
+
 @app.route("/add_event", methods = ["GET", "POST"])
 @login_required
 def add_event():
@@ -184,6 +188,8 @@ def add_event():
 
     return redirect("/upcoming_events")
 
+
+
 @app.route("/logout")
 def logout():
     """Log user out"""
@@ -198,13 +204,17 @@ if __name__ == "__main__":
     app.run(debug = True)
 
 
+
+
 @app.route("/upcoming_events", methods = ["GET"])
 @login_required
 def upcoming_events():
-    db.execute("SELECT * FROM events WHERE club_id = %s ORDER BY date, time", (session["user_id"], ))
+    db.execute("SELECT * FROM events WHERE club_id = %s AND date >= (SELECT date_trunc('day', NOW())) ORDER BY date, time", (session["user_id"], ))
     events = db.fetchall()
 
     return render_template("upcoming_events.html", events = events)
+
+
 
 @app.route("/club_profile", methods = ["POST"])
 def club_profile():
@@ -215,6 +225,8 @@ def club_profile():
     print(club_info)
 
     return render_template("club_profile.html", club_info = club_info)
+
+
 
 @app.route("/edit_bio", methods = ["GET", "POST"])
 @login_required
@@ -236,6 +248,7 @@ def edit_bio():
 
 
 
+
 @app.route("/edit_events_direct", methods = ["POST"])
 @login_required
 def edit_events_direct():
@@ -245,6 +258,8 @@ def edit_events_direct():
     event = db.fetchall()[0]
 
     return render_template("edit_events_direct.html", event = event)
+
+
 
 @app.route("/edit_events", methods = ["POST"])
 @login_required
