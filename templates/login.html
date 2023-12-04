@@ -4,29 +4,33 @@
 
 {% block main %}
 
-<div class="mb-3">
-    <h3>Please login to your account</h3>
-</div>
-
-
-<form action="/login" method="post">
-    <div class="mb-3">
-        <select class="form-select mx-auto w-auto" name="clubname">
-            <option disabled selected value="">Club</option>
-            {% for club in clubs %}
-                <option value="{{club[0]}}">{{club[0]}}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="mb-3">
-        <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
-    </div>
+<main class="container py-5 text-center">
 
     <div class="mb-3">
-        <button class="btn btn-primary" type="submit">Log In</button>
+        <h3>Please login to your account</h3>
     </div>
-    
 
-</form>
+
+    <form action="/login" method="post">
+        <div class="mb-3">
+            <select class="form-select mx-auto w-auto" name="clubname">
+                <option disabled selected value="">Club</option>
+                {% for club in clubs %}
+                    <option value="{{club[0]}}">{{club[0]}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+        </div>
+
+        <div class="mb-3">
+            <button class="btn btn-primary" type="submit">Log In</button>
+        </div>
+
+    </form>
+
+</main>
+
 
 {% endblock %}

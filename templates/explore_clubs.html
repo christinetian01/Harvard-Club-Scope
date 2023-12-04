@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 
+{% block title %} Explore Clubs {% endblock %}
+
 {% block main %}
 
 <main class="container py-5 text-center">
@@ -13,8 +15,8 @@
         </thead>
         {% for club in clubs %}
             <tr>
+                <td class="text-start">{{club[0]}}</td>
                 <td class="text-start">{{club[1]}}</td>
-                <td class="text-start">{{club[2]}}</td>
             </tr>
         {% endfor %}
     </table>

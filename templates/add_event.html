@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 
+{% block title %} Add Events  {% endblock %}
+
 {% block main %}
 
 <main class="container py-5 text-center">
@@ -16,7 +18,7 @@
         <input autocomplete="off" autofocus class="form-control mx-auto" id="loc" name="loc" placeholder="Location Name" type="text" required>
     </div>
     <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="room_num" name="room_num" placeholder="Room Number (if applicable)" type="text" required>
+        <input autocomplete="off" autofocus class="form-control mx-auto" id="room_num" name="room_num" placeholder="Room Number" type="text" required>
     </div> 
 
     <h3>Event Date</h3>
