@@ -1,5 +1,7 @@
 # Harvard CScope README
 
+Video: https://youtu.be/Mry0uttMfJA 
+
 Harvard CScope is a web app through which students at Harvard can explore CS clubs (currently limited to the clubs listed on https://csadvising.seas.harvard.edu/opportunities/clubs/ ) and Harvard CS club leaders can publicize their club events. This was intended to make club event dates easier to track and negate the need for a large amount of emails publicizing the event. Currently, many CS club events are publicized through the HCS emailing list. If someone is interested in attending and wants to keep track of it, they would probably have to do something along the lines of manually entering the event into their Google Calendar. This process can get irritating if someone wants to attend multiple events. 
 
 Harvard CScope allows clubs to create accounts through which they can submit information about their upcoming events, which will be visible to everyone using the app through an interactive calendar or a simple table. It is also flexible in that it allows clubs to edit their events in case things like the date or location changes. 
