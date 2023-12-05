@@ -76,6 +76,7 @@
                 <th class="text-start">Description</th>
                 <th class="text-end">Time</th>
                 <th class="text-end">Location</th>
+                <th class="text-end">Room Num</th>
             </tr>
         </thead>
         {% for event in events %}
@@ -85,6 +86,7 @@
                 <td class="text-start">{{event[3]}}</td>
                 <td class="text-end">{{event[7]}}</td>
                 <td class="text-end">{{event[4]}}</td>
+                <td class="text-end">{{event[5]}}</td>
             </tr>
         {% endfor %}
     </table>

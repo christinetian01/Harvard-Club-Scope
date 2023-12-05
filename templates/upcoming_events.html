@@ -14,6 +14,7 @@
                 <th class="text-start">Date</th>
                 <th class="text-start">Time</th>
                 <th class="text-start">Location</th>
+                <th class="text-start">Room Number</th>
             </tr>
         </thead>
         {% for event in events %}
@@ -23,6 +24,7 @@
                 <td class="text-start">{{event[6]}}</td>
                 <td class="text-start">{{event[7]}}</td>
                 <td class="text-start">{{event[4]}}</td>
+                <td class="text-start">{{event[5]}}</td>
                 <td class="text-end">
                     <form action = "/edit_events_direct" method = "post">
                         <button type = "submit" name = "edit_button" value = {{event[8]}}>Edit</button>
