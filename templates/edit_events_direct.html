@@ -8,21 +8,21 @@
 <main class="container py-5 text-center" >
     <form action="/edit_events" method="post">
     <div style="display: none;">
-        <input type="text" name = "event_id" value='{{event[8]}}' readonly>
+        <input type="text" name = "event_id" value='{{event[8]}}'>
     </div>
     <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="event_name" name="event_name" placeholder="Event Name" type="text" value = '{{event[2]}}'>
+        <input autocomplete="off" autofocus class="form-control mx-auto" id="event_name" name="event_name" placeholder="Event Name" type="text" value = '{{event[2]}}' required>
     </div>
     <div class="mb-3">
-        <textarea name="description" rows="4" cols="50" placeholder = "Event Description">{{event[3]}}</textarea>
+        <textarea name="description" rows="4" cols="50" placeholder = "Event Description" required>{{event[3]}}</textarea>
     </div>
     
     <h3>Location Details</h3>
     <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="loc" name="loc" placeholder="Location Name" type="text" value = '{{event[5]}}'>
+        <input autocomplete="off" autofocus class="form-control mx-auto" id="loc" name="loc" placeholder="Location Name" type="text" value = '{{event[4]}}' required>
     </div>
     <div class="mb-3">
-        <input autocomplete="off" autofocus class="form-control mx-auto" id="room_num" name="room_num" placeholder="Room Number" type="text" value = '{{event[5]}}'>
+        <input autocomplete="off" autofocus class="form-control mx-auto" id="room_num" name="room_num" placeholder="Room Number" type="text" value = '{{event[5]}}' required>
     </div> 
 
     <h3>Event Date</h3>

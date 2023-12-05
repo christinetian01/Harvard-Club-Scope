@@ -15,7 +15,7 @@
                 <th class="text-start">Date</th>
                 <th class="text-start">Time</th>
                 <th class="text-start">Location</th>
-                <th class="text-start">Romm Number</th>
+                <th class="text-start">Room Number</th>
             </tr>
         </thead>
         {% for event in all_events %}
@@ -25,6 +25,7 @@
                 <td class="text-start">{{event[3]}}</td>
                 <td class="text-start">{{event[6]}}</td>
                 <td class="text-start">{{event[7]}}</td>
+                <td class="text-start">{{event[4]}}</td>
                 <td class="text-start">{{event[5]}}</td>
             </tr>
         {% endfor %}
